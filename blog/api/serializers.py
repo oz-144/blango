@@ -10,7 +10,11 @@ class TagField(serializers.SlugRelatedField):
             return self.get_queryset().get_or_create(value=data.lower())[0]
         except (TypeError, ValueError):
             self.fail(f"Tag value {data} is invalid")
-
+            
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = "__all__"
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
